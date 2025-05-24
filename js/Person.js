@@ -1,7 +1,7 @@
 class Person extends GameObject {
     constructor(config){
         super(config);
-        this.movingProgressRemaining = 16; // controla o progresso de um movimento em pixels
+        this.movingProgressRemaining = 0; // controla o progresso de um movimento em pixels
 
         this.direction = "down"; // Define a direção inicial do personagem
 

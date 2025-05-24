@@ -53,7 +53,7 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
 
 window.OverworldMap = {
     Galinheiro: { // mapa
-        lowerSrc: "/assets/img/galinheiro.png", // layer de base do mapa (chão do mapa)
+        lowerSrc: "./assets/img/galinheiro.png", // layer de base do mapa (chão do mapa)
         upperSrc: "", // layer superior do mapa (se precisa de algo acima do player)
         gameObjects: { // define os personagens/objetos que o mapa vai ter
             hero: new Person({ // personagem principal
@@ -64,7 +64,7 @@ window.OverworldMap = {
             npc1: new Person({
                 x: utils.withGrid(6),
                 y: utils.withGrid(10),
-                src: "/assets/img/White_chiken.png",
+                src: "./assets/img/White_chiken.png",
             })
         },
         walls: {
