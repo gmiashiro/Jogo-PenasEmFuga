@@ -1,0 +1,27 @@
+#gif-screen {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    z-index: 100;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+}
+
+#gif-screen img {
+    max-width: 1106px;
+    border-radius: 20px;
+}
+
+.fade-out {
+    animation: scene-transition-fade-out 0.4s forwards;
+}
+
+@keyframes scene-transition-fade-out {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
