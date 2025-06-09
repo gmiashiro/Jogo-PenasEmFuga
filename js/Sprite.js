@@ -37,6 +37,7 @@ class Sprite { //animações
         this.animationFrameProgress = this.animationFrameLimit; // contador
 
         this.isFrog = config.isFrog || false;
+        this.isEasterEgg = config.isEasterEgg || false; // Para saber se é um easter egg
 
         //Referencia aos objetos do jogo
         this.gameObject = config.gameObject;
@@ -73,7 +74,7 @@ class Sprite { //animações
 
     draw(ctx, cameraPerson){
         let x, y;
-        
+        console.log(this.isFrog);
         // Calcula a posição X e Y real no canvas, levando em conta a posição do gameObject
         if (this.isFrog) { // Se for o sapo, ele, por ser 16x16, é calculado diferente
             x = this.gameObject.x - (-16) + utils.withGrid(8) - cameraPerson.x;
@@ -97,6 +98,9 @@ class Sprite { //animações
                 16,16
                 // especificam onde e com que tamanho o frame cortado será desenhado no canvas.
             )
+        } else if (this.isEasterEgg) { // Se for um easter egg, ele não é animado
+            console.log("é um easter egg uai");
+            this.isLoaded && ctx.drawImage(this.image, x, y, 32, 32);
         } else {
             this.isLoaded && ctx.drawImage(this.image,
                 frameX * 32, frameY * 32,

@@ -9,6 +9,7 @@ class GameObject {
             gameObject: this, // herda todas as propriedades de GameObject
             src: config.src || "./assets/img/pinguim-spriteSheet.png", // Define o caminho da imagem. Se não tiver é usada a do caminho fornecido (no caso o personagem principal)
             isFrog: config.isFrog || false, // Para saber se é um sapo ou não. Caso não seja definido, ele assume que é falso
+            isEasterEgg: config.isEasterEgg || false,
         }); 
         this.behaviorLoop = config.behaviorLoop || [];  // é um array que vai ser usado para definir os comportamentos normais dos NPCs
         this.behaviorLoopIndex = 0; // serve para saber qual comportamento está acontecendo

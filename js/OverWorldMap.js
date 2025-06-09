@@ -16,6 +16,7 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
         this.foundFrog2 = state.foundFrog2 || false;
         this.foundFrog3 = state.foundFrog3 || false;
         this.name = config.name; // Serve para saber em qual mapa se está
+        this.test = true;
     }
 
     drawLowerImage(ctx, cameraPerson){
@@ -62,10 +63,17 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
             let instance; // Cria uma instância de acordo com o tipo de objeto
             if (object.type === "Person") {
                 instance = new Person(object);
+            } else if (object.type === "EasterEgg") {
+                instance = new EasterEgg(object);
+                
             }
 
             this.gameObjects[key] = instance;
             this.gameObjects[key].id = key;
+
+            if (object.type === "EasterEgg") {
+                console.log(instance.name, instance.description, instance.mapName);
+            }
 
             if (this.foundFrog1 && key === "frog1") { // Se o sapo 1 foi encontrado, e ele for o objeto da vez
                 // Montar ele lá no pet-shop
@@ -134,6 +142,16 @@ window.OverworldMaps = {
                 isPlayerControlled: true,
                 x: utils.withGrid(16),
                 y: utils.withGrid(14),
+            },
+            pintinhos: {
+                type: "EasterEgg",
+                isEasterEgg: true,
+                name: "Pintinhos",
+                description: "Ou será uma galinha adulta!?",
+                mapName: "Galinheiro",
+                x: utils.withGrid(-4),
+                y: utils.withGrid(12),
+                src: "./assets/img/pintinhosEasterEgg.png",
             },
             galinhaBranca: {
                 type: "Person",
@@ -929,6 +947,9 @@ window.OverworldMaps = {
             ],
             [utils.asGridCoord(12,31)] : [ // Espaço acima do sapo da sala
                 {events: [{type: "foundFrog", who: "frog3", x: 12, y: 31},]}
+            ],
+            [utils.asGridCoord(-4,13)] : [ // Achou os pintinhos fingindo ser adultos
+                {events: [{type: "foundEasterEgg", who: "pintinhos"},]}
             ],
         }
     },
