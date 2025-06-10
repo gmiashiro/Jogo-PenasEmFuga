@@ -12,7 +12,7 @@ class Sprite { //animações
         this.shadow = new Image();
         this.useShadow = true; //config.useShadow || false
         if(this.useShadow){ // se useShadow for true, apresenta o png da sombra
-            this.shadow.src = "./assets/img/sombraPinguim.png"; //colocar aqui a imagem da sombra
+            this.shadow.src = "./assets/img/sprites/sombraPinguim.png"; //colocar aqui a imagem da sombra
         }
         this.shadow.onload = () => {
             this.isShadowLoaded = true;
@@ -74,7 +74,6 @@ class Sprite { //animações
 
     draw(ctx, cameraPerson){
         let x, y;
-        console.log(this.isFrog);
         // Calcula a posição X e Y real no canvas, levando em conta a posição do gameObject
         if (this.isFrog) { // Se for o sapo, ele, por ser 16x16, é calculado diferente
             x = this.gameObject.x - (-16) + utils.withGrid(8) - cameraPerson.x;
@@ -99,7 +98,6 @@ class Sprite { //animações
                 // especificam onde e com que tamanho o frame cortado será desenhado no canvas.
             )
         } else if (this.isEasterEgg) { // Se for um easter egg, ele não é animado
-            console.log("é um easter egg uai");
             this.isLoaded && ctx.drawImage(this.image, x, y, 32, 32);
         } else {
             this.isLoaded && ctx.drawImage(this.image,

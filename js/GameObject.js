@@ -7,7 +7,7 @@ class GameObject {
         this.direction = config.direction || "down"; // define a direção para qual o objeto está olhando, por padrão, para baixo
         this.sprite = new Sprite({
             gameObject: this, // herda todas as propriedades de GameObject
-            src: config.src || "./assets/img/pinguim-spriteSheet.png", // Define o caminho da imagem. Se não tiver é usada a do caminho fornecido (no caso o personagem principal)
+            src: config.src || "./assets/img/sprites/pinguim-spriteSheet.png", // Define o caminho da imagem. Se não tiver é usada a do caminho fornecido (no caso o personagem principal)
             isFrog: config.isFrog || false, // Para saber se é um sapo ou não. Caso não seja definido, ele assume que é falso
             isEasterEgg: config.isEasterEgg || false,
         }); 

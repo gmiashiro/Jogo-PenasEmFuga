@@ -134,7 +134,7 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
 window.OverworldMaps = {
     Galinheiro: { // mapa
         name: "Galinheiro",
-        lowerSrc: "./assets/img/galinheiroMapa.png", // layer de base do mapa (chão do mapa)
+        lowerSrc: "./assets/img/mapas/galinheiroMapa.png", // layer de base do mapa (chão do mapa)
         upperSrc: "", // layer superior do mapa (se precisa de algo acima do player)
         configObjects: { // define os personagens/objetos que o mapa vai ter
             hero: { // personagem principal
@@ -151,13 +151,13 @@ window.OverworldMaps = {
                 mapName: "Galinheiro",
                 x: utils.withGrid(-4),
                 y: utils.withGrid(12),
-                src: "./assets/img/pintinhosEasterEgg.png",
+                src: "./assets/img/easterEgg/sprites/pintinhosEasterEgg.png",
             },
             galinhaBranca: {
                 type: "Person",
                 x: utils.withGrid(19),
                 y: utils.withGrid(19),
-                src: "./assets/img/galinhaBranca.png",
+                src: "./assets/img/sprites/galinhaBranca.png",
                 behaviorLoop: [  // é um array que vai definir o comportamento normal de um NPC
                     {type: "walk", direction: "left",time: 800},  
                     {type: "walk", direction: "left",time: 800},
@@ -173,7 +173,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(21),
                 y: utils.withGrid(14),
-                src: "./assets/img/galinhaMarrom.png",
+                src: "./assets/img/sprites/galinhaMarrom.png",
                 behaviorLoop: [
                     {type: "walk", direction: "left"},  
                     {type: "walk", direction: "left"},
@@ -193,7 +193,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(-1),
                 y: utils.withGrid(5),
-                src: "./assets/img/galinhaPaova.png",
+                src: "./assets/img/sprites/galinhaPaova.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "up", time: 1500}, // Vê o que tem na geladeira
                     {type: "walk", direction: "left"},
@@ -218,7 +218,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(-19),
                 y: utils.withGrid(13),
-                src: "./assets/img/galinhaClotilde.png",
+                src: "./assets/img/sprites/galinhaClotilde.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "up", time: 9300}, // Está passando roupa
                     {type: "walk", direction: "left"},
@@ -253,7 +253,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(13),
                 y: utils.withGrid(29),
-                src: "./assets/img/galinhaBernadette.png",
+                src: "./assets/img/sprites/galinhaBernadette.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "left", time: 10000}, // Descansa no sofá
                     {type: "walk", direction: "left"}, 
@@ -332,7 +332,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(30),
                 y: utils.withGrid(16),
-                src: "./assets/img/galinhaSegurancaMarrom.png",
+                src: "./assets/img/sprites/galinhaSegurancaMarrom.png",
                 behaviorLoop: [  
                    {type: "stand", direction: "left", time: 2800},
                 ]
@@ -341,7 +341,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(25),
                 y: utils.withGrid(7),
-                src: "./assets/img/galinhaGalinacia.png",
+                src: "./assets/img/sprites/galinhaGalinacia.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "left", time: 5200}, // Descansa na poltrona
                     {type: "walk", direction: "left"},
@@ -369,7 +369,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(14),
                 y: utils.withGrid(13),
-                src: "./assets/img/galinhaPenosa.png",
+                src: "./assets/img/sprites/galinhaPenosa.png",
                 behaviorLoop: [ 
                     //{type: "stand", direction: "bottom", time: 5200}, 
                 ]
@@ -379,7 +379,7 @@ window.OverworldMaps = {
                 x: utils.withGrid(-15),
                 y: utils.withGrid(18),
                 isFrog: true,
-                src: "./assets/img/frogSprite.png",
+                src: "./assets/img/sprites/frogSprite.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "up", time: 3000}
                 ]
@@ -389,7 +389,7 @@ window.OverworldMaps = {
                 x: utils.withGrid(30),
                 y: utils.withGrid(22),
                 isFrog: true,
-                src: "./assets/img/frogSprite.png",
+                src: "./assets/img/sprites/frogSprite.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "right", time: 3000}
                 ]
@@ -399,7 +399,7 @@ window.OverworldMaps = {
                 x: utils.withGrid(12),
                 y: utils.withGrid(32),
                 isFrog: true,
-                src: "./assets/img/frogSprite.png",
+                src: "./assets/img/sprites/frogSprite.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "left", time: 3000}
                 ]
@@ -912,7 +912,7 @@ window.OverworldMaps = {
             [utils.asGridCoord(9,30)] : true,
             [utils.asGridCoord(10,30)] : true,
 
-            [utils.asGridCoord(13,29)] : true,
+            //[utils.asGridCoord(13,29)] : true,
             [utils.asGridCoord(13,30)] : true,
             [utils.asGridCoord(13,31)] : true,
             [utils.asGridCoord(14,29)] : true,
@@ -956,7 +956,7 @@ window.OverworldMaps = {
     // Mapa da parte da fazenda
     Fazenda: { // mapa
         name: "Fazenda",
-        lowerSrc: "./assets/img/fazendaMapa.png", // layer de base do mapa (chão do mapa)
+        lowerSrc: "./assets/img/mapas/fazendaMapa.png", // layer de base do mapa (chão do mapa)
         upperSrc: "", // layer superior do mapa (se precisa de algo acima do player)
         configObjects: { // define os personagens/objetos que o mapa vai ter
             hero: ({ // personagem principal
@@ -969,7 +969,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(21),
                 y: utils.withGrid(14),
-                src: "./assets/img/galinhaMarrom.png",
+                src: "./assets/img/sprites/galinhaMarrom.png",
                 behaviorLoop: [
                     {type: "walk", direction: "left"},  
                     {type: "walk", direction: "left"},

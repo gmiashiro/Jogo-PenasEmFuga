@@ -16,7 +16,7 @@
   width: clamp(100px, 4vh, 50px);
   height: clamp(100px, 4vh, 50px);
   
-  background-image: url('../assets/img/hotBar.png');
+  background-image: url('../assets/img/hud/hotBar.png');
   image-rendering: pixelated;
   background-size: cover;
 }
@@ -31,7 +31,7 @@
   width: clamp(100px, 4.5vh, 55px);
   height: clamp(100px, 4.5vh, 55px);
   
-  background-image: url('../assets/img/Task-icon.png'); /* Lembre-se de usar um ícone dedicado */
+  background-image: url('../assets/img/hud/Task-icon.png'); /* Lembre-se de usar um ícone dedicado */
   background-size: contain;
   image-rendering: pixelated;
   border: clamp(1px, 0.3vh, 3px) solid #3f3939; /* Borda também responsiva */
@@ -119,7 +119,7 @@
   width: clamp(100px, 4.5vh, 55px);
   height: clamp(100px, 4.5vh, 55px);
   
-  background-image: url('../assets/img/coin-icon.png'); /* Usando hotBar.png como solicitado */
+  background-image: url('../assets/img/hud/coin-icon.png'); /* Usando hotBar.png como solicitado */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -163,7 +163,7 @@
   height: clamp(100px, 4.5vh, 55px);
   
   /* Usando hotBar.png como solicitado */
-  background-image: url('../assets/img/Level-icon.png');
+  background-image: url('../assets/img/hud/Level-icon.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
