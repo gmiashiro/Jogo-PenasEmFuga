@@ -25,3 +25,18 @@
     from {opacity: 1;}
     to {opacity: 0;}
 }
+
+#easterEggs-container {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    z-index: 100;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    background-color: floralwhite;
+}

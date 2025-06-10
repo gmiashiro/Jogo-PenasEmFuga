@@ -68,9 +68,11 @@ class Overworld {
         })
     }
 
-    easterEggsFoundCheck() {
+    easterEggsFoundCheck() { // Método que vê se algum easter-egg foi encontrado
         document.addEventListener("EasterEggWasFound", e => {
-            this.easterEggsFound.push(e.detail.whoId);
+            if (!this.easterEggsFound.includes(e.detail.whoId)) { // Se não tiver esse easter-egg na lista
+                this.easterEggsFound.push(e.detail.whoId); // Inclui ele na lista de easter eggs encontrados
+            }
         })
     }
 
@@ -81,7 +83,7 @@ class Overworld {
             foundFrog1: this.foundFrog1,
             foundFrog2: this.foundFrog2,
             foundFrog3: this.foundFrog3,
-            easterEggsFound: this.easterEggsFound,
+            easterEggsFound: this.easterEggsFound, // Passa a lista de easter-eggs encontrados
         });
         this.map.overworld = this;
         
@@ -121,3 +123,21 @@ class Overworld {
         
     }
 }
+
+// function showEasterEggs() {
+//     if(document.getElementById("easterEggs-container"))return;
+
+//     const EasterEggListContainer = document.createElement("div");
+//     EasterEggListContainer.id = "easterEggs-container";
+//     this.easterEggsFound.forEach((element) => {
+//         EasterEggListContainer.innerHTML = EasterEggListContainer.innerHTML + "<br><span>" + element + "</span>";
+//     })
+
+//     const closeBtn = document.createElement("button");
+//     closeBtn.innerText = "Fechar";
+//     closeBtn.style.marginTop = "16px";
+//     closeBtn.onclick = () => EasterEggListContainer.remove();
+//     EasterEggListContainer.appendChild(closeBtn);
+
+//     document.querySelector(".game-container").appendChild(EasterEggListContainer);
+// }
