@@ -15,6 +15,7 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
         this.foundFrog1 = state.foundFrog1 || false; // Para saber se foi encontrado os sapos. Caso não tenha valor, é falso
         this.foundFrog2 = state.foundFrog2 || false;
         this.foundFrog3 = state.foundFrog3 || false;
+        this.easterEggsFound = state.easterEggsFound || [];
         this.name = config.name; // Serve para saber em qual mapa se está
         this.test = true;
     }
@@ -71,9 +72,9 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
             this.gameObjects[key] = instance;
             this.gameObjects[key].id = key;
 
-            if (object.type === "EasterEgg") {
-                console.log(instance.name, instance.description, instance.mapName);
-            }
+            // if (object.type === "EasterEgg") {
+            //     console.log(instance.name, instance.description, instance.mapName);
+            // }
 
             if (this.foundFrog1 && key === "frog1") { // Se o sapo 1 foi encontrado, e ele for o objeto da vez
                 // Montar ele lá no pet-shop
@@ -110,6 +111,7 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
             })
             await eventHandler.init();
         }
+        console.log(this.easterEggsFound);
 
         this.isCutscenePlaying = false; // ao acabar, atualiza a variável para false
 
