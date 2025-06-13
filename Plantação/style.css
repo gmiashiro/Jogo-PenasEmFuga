@@ -1,0 +1,464 @@
+/* ===== ESTILOS GLOBAIS ===== */
+/* Reset básico */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #333;
+}
+
+/* Container principal do jogo */
+.game-container {
+    width: 70vw; /* 70% da largura da viewport */
+    height: 85vh; /* 85% da altura da viewport */
+    position: relative;
+    margin: 20px auto;
+    overflow: hidden;
+    background: #4a9c2d; /* Verde escuro para o fundo */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 2px solid #388e3c;
+}
+
+/* Canvas do jogo */
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #78b159 url('img/mapaPlantação.png') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* ===== INTERFACE DO USUÁRIO ===== */
+/* Título do jogo */
+.game-title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+/* Instruções do jogo */
+.instructions {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    z-index: 100;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+/* ===== SISTEMA DE INVENTÁRIO (HOTBAR) ===== */
+/* Container da barra de itens */
+.hotbar-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Slots individuais da hotbar */
+.hotbar {
+    width: 64px;
+    height: 64px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Informações dos itens na hotbar */
+.seed-info, .item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    gap: 4px;
+}
+
+/* Contadores de itens */
+.seed-count, .item-count {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Visual específico para itens coletados */
+.item-info {
+    background: rgba(76, 175, 80, 0.2);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+/* ===== POPUP DE PLANTAÇÃO ===== */
+/* Overlay escuro que cobre toda a tela */
+.popup-plantacao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Container principal do popup */
+.popup-content {
+    background: linear-gradient(to bottom, #4a9c2d, #407e1c);
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 780px;
+    height: auto;
+    min-height: 600px;
+    max-height: 90vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    position: relative;
+    border: 3px solid #388e3c;
+    color: white;
+}
+
+.popup-content .hotbar-container {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  margin-top: 40px;
+  padding: 20px;
+  border-radius: 16px;
+  width: 80%;
+  justify-content: center;
+}
+
+.popup-content .hotbar {
+  width: 80px;
+  height: 80px;
+  margin: 0 10px;
+}
+
+.popup-content .seed-info span,
+.popup-content .item-info span {
+  font-size: 1.5rem;
+}
+
+.popup-content .seed-count,
+.popup-content .item-count {
+  font-size: 1.2rem;
+}
+
+.popup-inventario {
+  margin-top: 40px;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.popup-flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+#fechar-popup {
+  margin-top: 32px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  background: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+#fechar-popup:hover {
+  background: #f4511e;
+  transform: translateY(-2px);
+}
+.grid-plantacao {
+  margin: 24px 0 0 0;
+  width: min(320px, 50vw);
+  height: min(320px, 50vw);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 6px;
+}
+.bloco-plantacao {
+  background: url('img/terreno.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: filter 0.4s;
+  image-rendering: pixelated;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bloco-plantacao::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+
+.bloco-plantacao.em-progresso::after {
+  background: linear-gradient(rgba(255, 220, 100, 0.35), rgba(255, 220, 100, 0.25));
+  opacity: 1;
+}
+
+.bloco-plantacao.plantado::after {
+  background: linear-gradient(rgba(80, 60, 20, 0.35), rgba(80, 60, 20, 0.25));
+  opacity: 1;
+}
+
+.bloco-plantacao.em-progresso,
+.bloco-plantacao.plantado {
+  filter: none !important; /* Remove filtro para não escurecer a textura */
+}
+
+/* Remove duplicidade e overlay de .botoes-tipo-planta */
+.botoes-tipo-planta {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-left: 32px;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 320px;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+/* Popup inventário: sem overlay escuro, só borda e padding */
+.popup-inventario {
+    width: 100%;
+    padding: 24px;
+    background: none;
+    border-radius: 16px;
+    margin-top: 32px;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+/* Remove duplicidade de body */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #333;
+}
+
+/* Ajusta popup-content para visual pixel art puro */
+.popup-content {
+    background: linear-gradient(to bottom, #4a9c2d, #407e1c);
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 780px;
+    min-height: 600px;
+    max-height: 90vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    position: relative;
+    border: 3px solid #388e3c;
+    color: white;
+}
+
+/* Remove overlay escuro do grid e botões dentro do popup */
+.popup-content .hotbar-container,
+.popup-content .grid-plantacao,
+.popup-content .botoes-tipo-planta {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Ajusta hotbar no popup para visual limpo */
+.popup-content .hotbar-container {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 16px;
+    width: 80%;
+    justify-content: center;
+}
+
+/* Remove duplicidade de #game-canvas */
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #78b159 url('img/mapaPlantação.png') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Mantém botões e popup com visual pixel art */
+.btn-tipo-planta, #colher-tudo {
+    height: 48px;
+    min-width: 120px;
+    font-size: 18px;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#colher-tudo {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    margin-top: 24px;
+}
+
+#colher-tudo:hover {
+    background: #e65100;
+}
+
+.btn-tipo-planta {
+    background: #fff;
+    color: #333;
+    border: 2px solid #4caf50;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.btn-tipo-planta.selected {
+    background: #4caf50;
+    color: #fff;
+    border: 2px solid #388e3c;
+}
+
+.btn-tipo-planta:hover {
+    background: #e0ffe0;
+}
+
+#btn-trigo, #btn-milho {
+    height: 48px;
+    min-width: 120px;
+    font-size: 18px;
+    padding: 0 16px;
+    background: #fff;
+    color: #333;
+    border: 2px solid #4caf50;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#btn-trigo.selected, #btn-milho.selected {
+    background: #4caf50;
+    color: #fff;
+    border: 2px solid #388e3c;
+}
+
+#btn-trigo:hover, #btn-milho:hover {
+    background: #e0ffe0;
+}
+
+#colher-tudo {
+    margin-top: auto;
+    height: 70px;
+    font-size: 1.3rem;
+    padding: 0 24px;
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    min-width: 180px;
+}
+
+#colher-tudo:hover {
+    background: #e65100;
+}
+
+/* Título do popup */
+.popup-content h2 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.img-estagio-plantacao {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  image-rendering: pixelated;
+  z-index: 1;
+}
+
+.img-estagio-plantacao.img-terra {
+  width: 35%;
+  height: 35%;
+}

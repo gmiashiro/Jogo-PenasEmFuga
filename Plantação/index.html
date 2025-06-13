@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- 
+  ===== PLANTAÇÃO =====
+  1. Movimentar um personagem pelo mapa
+  2. Interagir com uma área de plantação
+  3. Plantar e colher diferentes tipos de culturas
+  4. Gerenciar um inventário de sementes e itens coletados
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Um jogo de plantação onde você pode cultivar trigo e milho">
+    <title>Plantação</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>    
+    <div class="game-container">
+        <canvas id="game-canvas"></canvas>
+    </div>
+    <!-- Pop-up de plantação -->
+    <div id="plantacao-popup" class="popup-plantacao" style="display: none;">
+      <div class="popup-content">
+        <h2>Plantação 3x3</h2>        <div class="popup-flex-row" style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 100%;">
+          <div class="grid-plantacao">
+            <!-- A grid 3x3 será criada via JS futuramente -->
+          </div>
+          <div class="botoes-tipo-planta">
+            <button id="btn-trigo" class="btn-tipo-planta">Trigo</button>
+            <button id="btn-milho" class="btn-tipo-planta">Milho</button>
+            <button id="colher-tudo">Colher tudo</button>
+          </div>
+        </div>
+        
+        <div class="popup-inventario">
+          <h3>Inventário</h3>
+          <!-- O HUD será movido para aqui quando o popup estiver aberto -->
+        </div>
+        
+        <button id="fechar-popup">Fechar</button>
+      </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="Hud.js"></script>
+    <script src="string.js"></script>
+</body>
+</html>
