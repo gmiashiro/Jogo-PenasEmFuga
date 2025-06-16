@@ -183,6 +183,14 @@ window.OverworldMaps = {
                     {type: "walk", direction: "right"}, 
                     {type: "walk", direction: "right"},
                     {type: "walk", direction: "right"}, 
+                ],
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", who: "Paova", text: "O chef? Ah, ele é bem exigente... Gosta das coisas sempre no ponto." },
+                            { type: "questProgress", flag: "TALKED_TO_PAOVA_CHEF", counter: "CHEF_INFO_GATHERED" }
+                        ]
+                    }
                 ]
             },
             Clotilde: {
@@ -219,8 +227,7 @@ window.OverworldMaps = {
                     {type: "walk", direction: "right"},  
                     {type: "walk", direction: "right"}, 
                 ]
-            },
-            Bernadette: {
+            },            Bernadette: {
                 type: "Person",
                 x: utils.withGrid(0),
                 y: utils.withGrid(20),
@@ -297,6 +304,14 @@ window.OverworldMaps = {
                     {type: "walk", direction: "down"},
                     {type: "walk", direction: "down"},
                     {type: "walk", direction: "right"},
+                ],
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", who: "Bernadette", text: "Aquele chef... vive enfurnado na cozinha. Mal o vemos por aqui." },
+                            { type: "questProgress", flag: "TALKED_TO_BERNADETTE_CHEF", counter: "CHEF_INFO_GATHERED" }
+                        ]
+                    }
                 ]
             },
             galinhaSegurancaMarrom: {

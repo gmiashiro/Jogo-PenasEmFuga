@@ -1,0 +1,31 @@
+.quest-timer {
+    position: absolute;
+    top: calc(50% - 100px); /* Posiciona um pouco acima do centro/personagem */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px; /* Aumentei um pouco o tamanho da fonte */
+    display: none; /* Inicialmente escondido */
+    z-index: 1000;
+    min-width: 80px; /* Garante uma largura mínima para estabilidade */
+    text-align: center;
+}
+
+.quest-timer.active {
+    display: block;
+}
+
+.quest-timer.danger {
+    animation: pulse 1s infinite;
+    background: rgba(255, 0, 0, 0.8);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}

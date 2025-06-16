@@ -8,9 +8,20 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/titlescreen.css">
     <link rel="stylesheet" href="css/SceneTransition.css">
+    <link rel="stylesheet" href="css/dialog.css">
+    <link rel="stylesheet" href="css/EasterEgg.css">
+    <link rel="stylesheet" href="css/Zoom.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="stylesheet" href="css/PlantingSystem.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="body">
+
     <div class="game-container">
+        <audio src="./assets/audio/songs/musicaFundo1.ogg" id="homeSong" autoplay="autoplay" loop = true></audio>
         <div id="titlescreen">
             <img src="assets/img/Telainicial.png" id="Telainicial">
             <div class="wrapper">
@@ -24,7 +35,10 @@
     
     <script src="js/utils.js"></script>
     <script src="js/DirectionInput.js"></script>
-    <script src="js/Overworld.js"></script>
+    <script src="js/KeypressListener.js"></script>
+
+    <!-- Classes base - Implementam funcionalidades fundamentais do jogo -->
+    <script src="js/Sprite.js"></script>
     <script src="js/GameObject.js"></script>
     <script src="js/Person.js"></script>
     <script src="js/Sprite.js"></script>
