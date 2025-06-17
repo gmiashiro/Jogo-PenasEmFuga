@@ -131,6 +131,9 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
                 }
             }
 
+            if (this.playerState.currentQuestId === "Q0.1" && key === "ClotildeQuestIcon") {
+                this.showQuestIcon("ClotildeQuestIcon", "Clotilde");
+            }
             if (this.playerState.currentQuestId === "Q1.1" && key === "galinhaCaipiraQuestIcon") {
                 this.showQuestIcon("galinhaCaipiraQuestIcon", "galinhaCaipira");
             }
@@ -442,6 +445,7 @@ window.OverworldMaps = {
                 type: "Person",
                 x: utils.withGrid(-19),
                 y: utils.withGrid(13),
+                haveQuestIcon: true,
                 src: "./assets/img/galinhaClotilde.png",
                 behaviorLoop: [ 
                     {type: "stand", direction: "up", time: 9300}, // Está passando roupa
@@ -475,6 +479,17 @@ window.OverworldMaps = {
                 talking: [
                     {
                         events: [
+                            { type: "textMessage", text: "Ok, você entendeu tudo que eu falei né?", faceHero: "Clotilde", quest: "Q0.1"},
+                            { type: "textMessage", text: "...", faceHero: "Clotilde", quest: "Q0.1"},
+                            { type: "textMessage", text: "Vou assumir que sim.", faceHero: "Clotilde", quest: "Q0.1"},
+                            { type: "textMessage", text: "O chefe não vai vender a passagem para um estranho...", faceHero: "Clotilde", quest: "Q0.1"},
+                            { type: "textMessage", text: "Então, meu filho, não seja um estranho!", faceHero: "Clotilde", quest: "Q0.1"},
+                            { type: "textMessage", text: "Converse com 3 galinhas e se faça conhecer", faceHero: "Clotilde", quest: "Q0.1"},
+                            { type: "questProgress", flag: "SPOKEN_TO_CLOTILDE_Q0", counter: "SPOKEN_TO_CLOTILDE_0" }
+                        ]
+                    },
+                    {
+                        events: [
                             { type: "textMessage", faceHero: "Clotilde", text: "Ouvi dizer que o prato preferido do chef leva um ingrediente secreto que só ele conhece.", quest: "Q9" },
                             { type: "questProgress", flag: "TALKED_TO_CLOTILDE_CHEF", counter: "CHEF_INFO_GATHERED" }
                         ]
@@ -492,8 +507,37 @@ window.OverworldMaps = {
                             { type: "textMessage", text: "Aquele enigma... 'a jornada não cessa' me soa como uma passagem. Já procurou nos cantos mais esquecidos do galinheiro?", faceHero: "Clotilde", quest: "Q10.2"},
                             { type: "questProgress", flag: "TALKED_CHICKEN_2_CLUE", counter: "CHIEF_CLUES_GATHERED" }
                         ]
-                    }
+                    },
+                    {
+                        events: [
+                            {
+                                type: "entregarItem",
+                                itemId: "Carretel de linha",
+                                quantity: 15,
+                                quest: "Q10.5",
+                                events_if_enough: [
+                                    { type: "textMessage", faceHero: "Clotilde", text: "Certo...", quest: "Q10.5"},
+                                    { type: "textMessage", faceHero: "Clotilde", text: "(tricô supersonico)", quest: "Q10.5"},
+                                    { type: "textMessage", faceHero: "Clotilde", text: "Aqui está 3 cobertores, coloque ele nos ovinhos!", quest: "Q10.5"},
+                                    { type: "addItemToPlayer", item: window.Items.cobertores },
+                                    { type: "questProgress", flag: "YARN_DELIVERED", counter: "YARN_DELIVERED_Q" } // Flag para completar a Quest 5
+                                ],
+                                events_if_not_enough: [
+                                    {type: "textMessage", faceHero: "Clotilde", text: "Hmm, recebi a informação que seriam 15 carretéis...", quest: "Q10.5"},
+                                    {type: "textMessage", faceHero: "Clotilde", text: "Com essa quantidade não consigo tricotar os cobertores.", quest: "Q10.5"}
+                                ]
+                            }
+                        ]
+                    },
                 ]
+            },
+            ClotildeQuestIcon: {
+                type:"Person",
+                x: utils.withGrid(-19),
+                y: utils.withGrid(11),
+                src: "./assets/img/questIcon.png",
+                isQuestIcon: true,
+                isVisible: false,
             },
             Bernadette: {
                 type: "Person",
@@ -1597,8 +1641,8 @@ window.OverworldMaps = {
             cavalo: {
                 type: "Person",
                 isHorse: true,
-                x: utils.withGrid(-1),
-                y: utils.withGrid(20),
+                x: utils.withGrid(-2),
+                y: utils.withGrid(16),
                 src: "./assets/img/cavaloSpriteSheet.png",
                 animations: {
                     "idle-right" : [ [1,0] ],
@@ -1610,11 +1654,28 @@ window.OverworldMaps = {
                     {type: "walk", direction: "right"},
                     {type: "walk", direction: "right"}, 
                     {type: "walk", direction: "right"},
+                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "right"}, 
+                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},
                     {type: "walk", direction: "left"},
                     {type: "walk", direction: "left"},
                     {type: "walk", direction: "left"},
                 ]
             },
+            cavaloEG: { // É um objeto de easter egg do álbum, ele não aparece no mapa, só é usado para mostrar o gif ao entrar na sala 
+                type: "EasterEgg",
+                isEasterEgg: true,
+                name: "Cavalo",
+                description: "O potro de ponei... Indomável",
+                mapName: "Fazenda",
+                x: utils.withGrid(50),
+                y: utils.withGrid(0),
+                src: "./assets/img/galinhaOvosDourados.png", // É genérico, já que não vai aparecer
+            },
+
 
             // Tiles de plantação FUNCIONAIS            plantTile1: { type: "PlantableSpot", x: utils.withGrid(-15), y: utils.withGrid(15), talking: [{ events: [{ type: "startPlanting" }] }] },
             plantTile2: { type: "PlantableSpot", x: utils.withGrid(-14), y: utils.withGrid(15), talking: [{ events: [{ type: "startPlanting" }] }] },
@@ -1765,6 +1826,19 @@ window.OverworldMaps = {
             [utils.asGridCoord(-28,18)] : [
                 {events: [{type: "changeMap", map: "Galinheiro"},]}
             ],
+            [utils.asGridCoord(-7,15)] : [ 
+                {events: [{type: "foundEasterEgg", who: "cavaloEG"},]}
+            ],
+            [utils.asGridCoord(-7,16)] : [ 
+                {events: [{type: "foundEasterEgg", who: "cavaloEG"},]}
+            ],
+            [utils.asGridCoord(-7,17)] : [ 
+                {events: [{type: "foundEasterEgg", who: "cavaloEG"},]}
+            ],
+            [utils.asGridCoord(-24,11)] : [ 
+                {events: [{type: "foundEasterEgg", who: "aviao"},]}
+            ],
+            
 
     }    
 },

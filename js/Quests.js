@@ -36,6 +36,9 @@ const QuestChecks = {
     FALAR_COM_CAIPIRA(playerState) {
         return playerState.questFlags.SPOKEN_TO_CAIPIRA >= 1;
     },
+    FALAR_COM_CLOTILDE_0(playerState) {
+        return playerState.questFlags.SPOKEN_TO_CLOTILDE_0 >= 1;
+    },
     FALAR_COM_GALINACIA(playerState) {
         return playerState.questFlags.SPOKEN_TO_GALINACIA >= 1;
     },
@@ -72,11 +75,26 @@ const QuestChecks = {
         const milhoVendido = playerState.questFlags.CORN_SOLD || 0;
         return milhoVendido >= 15;
     },
+    LEVAR_LINHA(playerState) {
+        return playerState.storyFlags.YARN_DELIVERED;
+    }
     // Adicione as funções de verificação para as outras quests aqui...
 }
 
 // A lista principal e ordenada de todas as quests do jogo
 window.QuestList = [
+    {
+        id: "Q0.1",
+        name: "",
+        description: "Fale com a Clotilde",
+        checkCompletion: QuestChecks.FALAR_COM_CLOTILDE_0,
+        progressKey: "SPOKEN_TO_CLOTILDE_0",
+        progressTarget: 1,
+        reward: {
+            type: "coins",
+            amount: 20
+        }
+    },
     {
         id: "Q1",
         name: "Primeiros Passos",
@@ -259,5 +277,23 @@ window.QuestList = [
         progressKey: "SPOKEN_TO_JUNINHO",
         progressTarget: 1,
         reward: { type: "coins", amount: 150 }
+    },
+    {
+        id: "Q10.5",
+        name: "", // Nome vazio
+        description: "Leve 15 carretéis de linha para a Clotilde.",
+        checkCompletion: QuestChecks.LEVAR_LINHA,
+        progressKey: "YARN_DELIVERED_Q",
+        progressTarget: 1,
+        reward: { type: "coins", amount: 20 }
+    },
+    {
+        id: "Q10.6",
+        name: "", // Nome vazio
+        description: "Coloque o cobertor nos ovinhos",
+        checkCompletion: QuestChecks.LEVAR_LINHA,
+        progressKey: "YARN_DELIVERED_Q",
+        progressTarget: 1,
+        reward: { type: "coins", amount: 20 }
     },
 ];

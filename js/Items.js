@@ -12,5 +12,12 @@ window.Items = {
         description: "Esfriou... A vovó não vai gostar disso.",
         src: "./assets/img/mingauFrio.png", // E esta também
         quantity: 1,
+    },
+    "cobertores": {
+        id: "cobertores",
+        name: "Cobertores",
+        description: "Aconchego para a nova geração",
+        src: "./assets/img/cobertores.png", // E esta também
+        quantity: 1,
     }
 };

@@ -13,7 +13,7 @@ class Overworld {
             ],
             storyFlags: {}, // Para eventos únicos, como "FALOU_COM_GALINHA_BRANCA"
             completedQuests: new Set(), // Um conjunto de IDs de quests já completadas
-            currentQuestId: "Q1", // Começa com a primeira quest
+            currentQuestId: "Q0.1", // Começa com a primeira quest
             questFlags: {},
             frogsList: [],
             porridgeTimerEndsAt: null, // Guarda o timestamp de quando o timer acaba
@@ -37,7 +37,9 @@ class Overworld {
 
         // 2. Atualiza o estado do jogador para a nova quest
         this.playerState.currentQuestId = questId;
-
+        if (questId === "Q0.1") {
+            this.map.showQuestIcon("ClotildeQuestIcon", "Clotilde");
+        }
         if (questId === "Q1.1") {
             this.map.showQuestIcon("galinhaCaipiraQuestIcon", "galinhaCaipira");
         }
@@ -158,6 +160,9 @@ class Overworld {
                 if (questId === "Q10.1") {
                     this.map.hideQuestIcon("galinhaSegurancaMarromQuestIcon", "galinhaSegurancaMarrom");
                 }
+                if (questId === "Q0.1") {
+                    this.map.hideQuestIcon("ClotildeQuestIcon", "Clotilde");
+                }
 
                 console.log("foi")
                 this.playerState.completedQuests.add(questId);
@@ -202,6 +207,9 @@ class Overworld {
             const nextQuest = window.QuestList[currentQuestIndex + 1];
             this.playerState.currentQuestId = nextQuest ? nextQuest.id : null;
 
+            if (this.playerState.currentQuestId === "Q0.1") {
+                this.map.showQuestIcon("ClotildeQuestIcon", "Clotilde");
+            }
             if (this.playerState.currentQuestId === "Q1.1") {
                 this.map.showQuestIcon("galinhaCaipiraQuestIcon", "galinhaCaipira");
             }
@@ -325,12 +333,19 @@ class Overworld {
                 if (npc.talking && npc.talking.length > 0) {
                     console.log("1")
 
-                    if (npc.talking[0].events[0].type === "entregarItem"  && npc.talking[0].events[0].quest === this.playerState.currentQuestId) {
-                        // Dependendo do resultado, inicia a cutscene apropriada
-                        this.map.startCutscene(npc.talking[0].events);
-                        dialogHappened = true;
+                    for (let x = 0; x < npc.talking.length; x++) {
+                        const firstEvent = npc.talking[x].events[0];
+
+                        if (firstEvent.type === "entregarItem" && firstEvent.quest === this.playerState.currentQuestId && !dialogHappened) {
+                            console.log("Executando evento entregarItem");
+                            this.map.startCutscene(npc.talking[x].events);
+                            dialogHappened = true;
+                            break; // já encontrou e executou, sai do loop
+                        }
                     }
-                    
+                    console.log(npc.talking[0].events[0].type);
+                    console.log(this.playerState.currentQuestId);
+
                     if (npc.talking[0].events[0].type === "startPlanting") {
                         console.log("1")
                         this.map.startCutscene(npc.talking[0].events);
