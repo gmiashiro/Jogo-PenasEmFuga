@@ -103,6 +103,9 @@ class Person extends GameObject {
 
         if (this.movingProgressRemaining === 0) {
             this.intentPosition = null;
+            if (this.isPlayerControlled) {
+                console.log(`Posição do Herói: x=${this.x/ 16}, y=${this.y/ 16}`);
+            }
             utils.emitEvent("PersonWalkingComplete", {
                 whoId: this.id
             });
