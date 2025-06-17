@@ -19,11 +19,11 @@ window.creditos_show = function() {
 
     // Lista de desenvolvedores (adicione os seus aqui)
     const devs = [
-        { nome: "Danilo R. Toriy", foto: "./../assets/img/milho.png" },
-        { nome: "Gabriel Miashiro ", foto: "./../assets/img/milho.png" },
-        { nome: "Laura Vitória", foto: "./../assets/img/milho.png" },
-        { nome: "Matheus Previato", foto: "./../assets/img/milho.png" },
-        { nome: "Murilo", foto: "./../assets/img/milho.png" }
+        { nome: "Danilo R. Toriy", foto: "./../assets/img/milho.png", github: "https://github.com/Danilo-Toriy", linkedin: ""  },
+        { nome: "Gabriel Miashiro ", foto: "./../assets/img/milho.png", github: "https://github.com/gmiashiro", linkedin: ""  },
+        { nome: "Laura Vitória", foto: "./../assets/img/milho.png", github: "https://github.com/vitoria-la", linkedin: ""  },
+        { nome: "Matheus Previato", foto: "./../assets/img/milho.png", github: "https://github.com/Matheus-Previato", linkedin: "" },
+        { nome: "Murilo", foto: "./../assets/img/milho.png", github: "https://github.com/MuriloTK", linkedin: "" }
     ];
 
     devs.forEach(dev => {
@@ -39,8 +39,31 @@ window.creditos_show = function() {
         nome.innerText = dev.nome;
         nome.className = "credits-nome";
 
+        const githubBtn = document.createElement("a");
+        githubBtn.href = dev.github;
+        githubBtn.target = "_blank";
+        githubBtn.className = "credits-link github";
+
+        const githubIcon = document.createElement("img");
+        githubIcon.src = "./../assets/img/github-logo.png"; // Caminho para o ícone do GitHub
+        githubIcon.className = "github-img"; 
+
+        const linkedinBtn = document.createElement("a");
+        linkedinBtn.href = dev.linkedin;
+        linkedinBtn.target = "_blank";
+        linkedinBtn.className = "credits-link linkedin";
+
+        const linkedinIcon = document.createElement("img");
+        linkedinIcon.src = "./../assets/img/linkedin-logo.png"; // Caminho para o ícone do LinkedIn
+        linkedinIcon.className = "linkedin-img";
+
+        githubBtn.appendChild(githubIcon);
+        linkedinBtn.appendChild(linkedinIcon);
+
         card.appendChild(img);
         card.appendChild(nome);
+        card.appendChild(githubBtn);
+        card.appendChild(linkedinBtn);
 
         popup.appendChild(card);
     });

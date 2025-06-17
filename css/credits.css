@@ -13,7 +13,7 @@
 }
 
 #credits-popup{
-    background: #fffbe7 !important;
+    background: rgb(54, 3, 54)!important;
     padding: 32px;
     border-radius: 16px;
     display: flex;
@@ -33,7 +33,7 @@
 }
 
 .credits-card{
-    background: #fff;
+    background: violet;
     border: 2px solid #DEB887;
     border-radius: 12px;
     padding: 16px;
@@ -54,4 +54,49 @@
 
 .credits-nome{
     margin-bottom: 6px;
+}
+
+.credits-link {
+  display: inline-block;
+  margin: 6px 4px 0 4px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgb(221, 208, 208);
+  color: #222;
+  text-decoration: none;
+  font-size: 0.9em;
+  border: 1.5px solid #bbb;
+  transition: background 0.2s, color 0.2s;
+}
+
+.github { 
+    /* background: #24292e;  */
+    color: #fff; 
+    border-color: #24292e; 
+}
+
+.github:hover { 
+    background: #444; 
+}
+
+.github-img{
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+}
+
+.-linkedin { 
+    background: #0077b5; 
+    color: #fff; 
+    border-color: #0077b5; 
+}
+
+.linkedin:hover { 
+    background: #005983; 
+}
+
+.linkedin-img{
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
 }
