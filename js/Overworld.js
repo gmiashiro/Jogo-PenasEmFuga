@@ -148,7 +148,7 @@ class Overworld {
         if (quest.checkCompletion(this.playerState)) {
             console.log(`Quest ${quest.name} completada!`);
             console.log(questId);
-            if (questId.includes(".")) {
+            if (questId.includes(".") && questId !== "Q10.4") {
                 if (questId === "Q1.1") {
                     this.map.hideQuestIcon("galinhaCaipiraQuestIcon", "galinhaCaipira");
                 }
@@ -225,6 +225,11 @@ class Overworld {
                     this.coins += quest.reward.amount;
                     this.hud.updateCoins(this.coins);
                 }
+            }
+
+            if (quest.onComplete) {
+                console.log("Função onComplete encontrada! Tentando executar a cutscene...");
+                quest.onComplete(); // Chama a função, que no caso é showCutscene
             }
 
             // Atualiza a HUD
@@ -325,12 +330,12 @@ class Overworld {
                 if (npc.talking && npc.talking.length > 0) {
                     console.log("1")
 
-                    if (npc.talking[0].events[0].type === "entregarItem"  && npc.talking[0].events[0].quest === this.playerState.currentQuestId) {
+                    if (npc.talking[0].events[0].type === "entregarItem" && npc.talking[0].events[0].quest === this.playerState.currentQuestId) {
                         // Dependendo do resultado, inicia a cutscene apropriada
                         this.map.startCutscene(npc.talking[0].events);
                         dialogHappened = true;
                     }
-                    
+
                     if (npc.talking[0].events[0].type === "startPlanting") {
                         console.log("1")
                         this.map.startCutscene(npc.talking[0].events);

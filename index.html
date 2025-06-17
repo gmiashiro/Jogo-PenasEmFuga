@@ -61,39 +61,34 @@
         </div>    </div>
     
     <script src="js/Creditos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>    <!-- Utilitários básicos - Carregados primeiro pois outras classes dependem deles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/DirectionInput.js"></script>
     <script src="js/KeypressListener.js"></script>
 
-    <!-- Classes base - Implementam funcionalidades fundamentais do jogo -->
     <script src="js/Sprite.js"></script>
     <script src="js/Items.js"></script> 
     <script src="js/Timer.js"></script>
     <script src="js/GameObject.js"></script>
     <script src="js/Person.js"></script>
 
-    <!-- Sistema de plantação - PlantableSpot deve vir antes do PlantingSystem -->
-    <!-- pois o PlantingSystem depende da classe PlantableSpot estar definida -->
     <script src="js/PlantableSpot.js"></script>
     <script src="js/PlantingSystem.js"></script>
 
-    <!-- Interface e interação -->
+    <script type="module" src="js/Quests.js"></script>
+
     <script src="js/Hud.js"></script>
     <script src="js/SceneTransition.js"></script>
     <script src="js/DialogManager.js"></script>
     <script src="js/TextMessage.js"></script>
     <script src="js/Shop.js"></script>
-    <script src="js/Quests.js"></script>
     <script src="js/EasterEgg.js"></script>
     
-    <!-- Sistema principal -->
     <script src="js/Audio.js"></script>
     <script src="js/Overworld.js"></script>
     <script src="js/OverWorldMap.js"></script>
     <script src="js/OverWorldEvent.js"></script>
 
-    <!-- Inicialização -->
     <script src="js/Init.js"></script>
     
 </body>
