@@ -223,19 +223,33 @@ class OverworldMap { // representa um mapa específico no jogo, incluindo seus o
         //Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this));
     }
 
-    checkForFootstepCutscene() { // Método que percebe se o pinguim entrou na coordenada que inicia alguma cutscene
-        const hero = this.gameObjects["hero"]; // Armazena em hero o objeto do pinguim
-        const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
+    checkForFootstepCutscene() {
+    const hero = this.gameObjects["hero"];
+    const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
 
-        if (this.isCutscenePlaying === false && match) { // Se não tiver rodando nenhuma cutscene e o player estiver no lugar que inicia uma
+    if (this.isCutscenePlaying === false && match) {
+        const eventConfig = match[0].events[0];
 
-            // A cutscene começa se: Não for do tipo "foundEasterEgg" OU se ela for do tipo "foundEasterEgg" e o easterEgg encontrado já não tinha sido encontrado
-            if ((match[0].events[0].type === "foundEasterEgg" && !this.easterEggsFoundID.includes(match[0].events[0].who)) || match[0].events[0].type != "foundEasterEgg") {
+        // --- INÍCIO DA MODIFICAÇÃO ---
+
+        // Condição especial para o Easter Egg da Galinha Dourada
+        if (eventConfig.type === "foundEasterEgg" && eventConfig.who === "galinhaDouradaEG") {
+            const galinhaDourada = this.gameObjects.galinhaDosOvosDourados;
+            // Apenas ativa a cutscene se a galinha estiver visível no mapa
+            if (galinhaDourada && galinhaDourada.isVisible !== false) {
                 this.startCutscene(match[0].events);
             }
+            return; // Impede que o código abaixo seja executado para este caso
         }
 
+        // --- FIM DA MODIFICAÇÃO ---
+
+        // Lógica original para todas as outras cutscenes
+        if ((eventConfig.type === "foundEasterEgg" && !this.easterEggsFoundID.includes(eventConfig.who)) || eventConfig.type !== "foundEasterEgg") {
+            this.startCutscene(match[0].events);
+        }
     }
+}
 
 }
 
@@ -304,22 +318,47 @@ window.OverworldMaps = {
             },
             galinhaMarrom: {
                 type: "Person",
-                x: utils.withGrid(21),
-                y: utils.withGrid(14),
+                x: utils.withGrid(16),
+                y: utils.withGrid(13),
                 haveQuestIcon: true,
                 src: "./assets/img/galinhaMarrom.png",
                 behaviorLoop: [
+                    {type: "stand", direction: "up", time: 8000},  
+                    {type: "walk", direction: "right"},  
+                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "down"},
+                    {type: "walk", direction: "right"},
+                    {type: "stand", direction: "up", time: 3540},
+                    {type: "walk", direction: "right"},
+                    {type: "stand", direction: "up", time: 5240},
+                    {type: "walk", direction: "right"},  
+                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "right"},  
+                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "right"},  
+                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "up"},
+                    {type: "stand", direction: "up", time: 1240},
+                    {type: "walk", direction: "left"},
                     {type: "walk", direction: "left"},  
                     {type: "walk", direction: "left"},
-                    {type: "walk", direction: "left"}, 
-                    {type: "walk", direction: "down"},  
+                    {type: "walk", direction: "left"},
                     {type: "walk", direction: "down"},
                     {type: "walk", direction: "down"},
-                    {type: "walk", direction: "right"},
-                    {type: "walk", direction: "right"},
-                    {type: "walk", direction: "right"},
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},  
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},
                     {type: "walk", direction: "up"},
-                    {type: "walk", direction: "up"},
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},  
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},
+                    {type: "stand", direction: "up", time: 1240},
+                    {type: "walk", direction: "right"},  
+                    {type: "walk", direction: "right"},
                     {type: "walk", direction: "up"},
                 ],
                 talking: [
@@ -340,8 +379,8 @@ window.OverworldMaps = {
             },
             galinhaMarromQuestIcon: {
                 type:"Person",
-                x: utils.withGrid(21),
-                y: utils.withGrid(12),
+                x: utils.withGrid(16),
+                y: utils.withGrid(11),
                 src: "./assets/img/questIcon.png",
                 isQuestIcon: true,
                 isVisible: false,
@@ -373,7 +412,7 @@ window.OverworldMaps = {
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", who: "Paova", text: "O chef? Ah, ele é bem exigente... Gosta das coisas sempre no ponto." },
+                            { type: "textMessage", faceHero: "Paova", text: "O chef? Ah, ele é bem exigente... Gosta das coisas sempre no ponto.", quest: "Q9" },
                             { type: "questProgress", flag: "TALKED_TO_PAOVA_CHEF", counter: "CHEF_INFO_GATHERED" }
                         ]
                     }
@@ -416,7 +455,7 @@ window.OverworldMaps = {
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", who: "Clotilde", text: "Ouvi dizer que o prato preferido do chef leva um ingrediente secreto que só ele conhece." },
+                            { type: "textMessage", faceHero: "Clotilde", text: "Ouvi dizer que o prato preferido do chef leva um ingrediente secreto que só ele conhece.", quest: "Q9" },
                             { type: "questProgress", flag: "TALKED_TO_CLOTILDE_CHEF", counter: "CHEF_INFO_GATHERED" }
                         ]
                     },
@@ -517,7 +556,7 @@ window.OverworldMaps = {
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", who: "Bernadette", text: "Aquele chef... vive enfurnado na cozinha. Mal o vemos por aqui." },
+                            { type: "textMessage", faceHero: "Bernadette", text: "Aquele chef... vive enfurnado na cozinha. Mal o vemos por aqui.", quest: "Q9" },
                             { type: "questProgress", flag: "TALKED_TO_BERNADETTE_CHEF", counter: "CHEF_INFO_GATHERED" }
                         ]
                     },
@@ -540,7 +579,7 @@ window.OverworldMaps = {
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", who: "galinhaSegurancaMarrom", text: "Quer saber do chef? Sei de muita coisa. Continue investigando." },
+                            { type: "textMessage", faceHero: "galinhaSegurancaMarrom", text: "Quer saber do chef? Sei de muita coisa. Continue investigando.", quest: "Q9" },
                             { type: "questProgress", flag: "TALKED_TO_SEGURANCA_CHEF", counter: "CHEF_INFO_GATHERED" }
                         ]
                     },
@@ -631,13 +670,33 @@ window.OverworldMaps = {
                     //{type: "stand", direction: "bottom", time: 5200}, 
                 ]
             },
+            JuninhoJunior: {
+                type: "Person",
+                x: utils.withGrid(-24),
+                y: utils.withGrid(18),
+                src: "./assets/img/chefeSemBone.png",
+                behaviorLoop: [ 
+                    {type: "stand", direction: "right", time: 5200}, 
+                    {type: "stand", direction: "left", time: 5200}, 
+                ]
+            },
             galinhaDosOvosDourados: { // Trata-se do NPC dessa galinha
                 type: "Person",
                 x: utils.withGrid(0),
                 y: utils.withGrid(14),
                 src: "./assets/img/galinhaOvosDourados.png",
                 behaviorLoop: [ 
-                    //{type: "stand", direction: "bottom", time: 5200}, 
+                    {type: "walk", direction: "right"}, 
+                    {type: "walk", direction: "right"}, 
+                    {type: "walk", direction: "up"}, 
+                    {type: "stand", direction: "up", time: 5000}, 
+                    {type: "walk", direction: "right"},
+                    {type: "stand", direction: "up", time: 3000},
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "left"},
+                    {type: "walk", direction: "down"},
+                    {type: "walk", direction: "left"},
+                    {type: "stand", direction: "down", time: 9000},
                 ],
                 talking: [
                     {events: [ 
@@ -1296,6 +1355,9 @@ window.OverworldMaps = {
         // Espaços em que acontece cutscenes
         cutsceneSpaces: {
             [utils.asGridCoord(31,17)] : [
+                {events: [{type: "changeMap", map: "Fazenda"},]}
+            ],
+            [utils.asGridCoord(31,18)] : [
                 {events: [{type: "changeMap", map: "Fazenda"},]}
             ],
             [utils.asGridCoord(-15,17)] : [ // Espaço acima do sapo da sala de costura

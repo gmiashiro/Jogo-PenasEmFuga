@@ -16,7 +16,10 @@ class DialogManager {
         "Eles estão de olho em todos nós."
       ],
       "Paova": [ // Personalidade parecida com a do Érick jacquin
-        "(Essa galinha não parece ter tempo para conversar)"
+        "(Essa galinha não parece ter tempo para conversar)",
+        "Tá achando que tô brincando!?",
+        "Isso aqui é uma cozinha, não um galinheiro!",
+        "... ah, espera..."
       ],
       "Clotilde": [ // Galinha costureira, personalidade materna, meio doce mas não passa a mão
         "Eu sei que você deve estar bem confuso",
@@ -62,6 +65,9 @@ class DialogManager {
       ],
       "galinhaGalinacia": [
         "Ue cachoeira!?",
+      ],
+      "JuninhoJunior": [
+        "Oi tio!",
       ],
       
     };
